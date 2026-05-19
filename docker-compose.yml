@@ -1,0 +1,56 @@
+
+services:
+  ollama:
+    image: alpine/ollama
+    container_name: cal-ollama
+    restart: unless-stopped
+    environment:
+      - HSA_OVERRIDE_GFX_VERSION=10.3.0
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    group_add:
+      - video
+      - render
+    volumes:
+      - ollama-data:/root/.ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - cal-net
+
+  openclaw:
+    image: ghcr.io/openclaw/openclaw:latest
+    container_name: cal-openclaw
+    restart: unless-stopped
+    volumes:
+      - openclaw-data:/root/.clawdbot
+    ports:
+      - "3737:3737"
+    networks:
+      - cal-net
+
+  app:
+    build: .
+    container_name: cal-app
+    restart: unless-stopped
+    depends_on:
+      - ollama
+      - openclaw
+    env_file: .env
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - OPENCLAW_HOST=http://openclaw:3737
+    volumes:
+      - ./data:/data
+    stdin_open: true
+    tty: true
+    networks:
+      - cal-net
+
+volumes:
+  ollama-data:
+  openclaw-data:
+
+networks:
+  cal-net:

@@ -1,0 +1,38 @@
+{
+  "name": "ac-47",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hardmando/ac-47.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hardmando/ac-47/issues"
+  },
+  "homepage": "https://github.com/hardmando/ac-47#readme",
+  "dependencies": {
+    "@types/node": "^25.9.1",
+    "axios": "^1.16.1",
+    "chalk": "^5.6.2",
+    "chrono-node": "^2.9.1",
+    "dotenv": "^17.4.2",
+    "ical.js": "^2.2.1",
+    "inquirer": "^13.4.3",
+    "luxon": "^3.7.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.7.1"
+  }
+}
